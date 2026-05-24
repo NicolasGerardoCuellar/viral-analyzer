@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Viral Script Analyzer — Intrade Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  /* Intrade Academy Brand */
+  --gold:    #F5B800;
+  --gold-h:  #E2A700;
+  --navy:    #0B1131;
+  --navy2:   #2A2F4C;
+  --navy3:   #2E3241;
+  --pale:    #F5F8FF;
+  --white:   #FFFFFF;
+  --gray:    #B5B8C5;
+  --gray2:   #E0E3EB;
+
+  /* Shadows */
+  --s1: 0 2px 8px rgba(0,0,0,.06);
+  --s2: 0 4px 16px rgba(0,0,0,.1);
+  --s3: 0 8px 24px rgba(0,0,0,.15);
+  --s-gold: 0 4px 12px rgba(245,184,0,.25);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--pale);
+  color: var(--navy3);
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+}
+
+/* ── HEADER ── */
+.header {
+  background: var(--white);
+  height: 80px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+}
+
+.header-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.logo-icon {
+  width: 36px; height: 36px;
+  background: var(--gold);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.logo-icon svg { width: 20px; height: 20px; }
+
+.logo-text {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.1;
+}
+
+.logo-text span {
+  display: block;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--gray);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.header-tool {
+  background: var(--navy);
+  color: var(--white);
+  border: none;
+  border-radius: 20px;
+  padding: 8px 20px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.header-badge {
+  background: var(--gold);
+  color: var(--navy);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ── HERO ── */
+.hero {
+  background: var(--navy);
+  padding: 72px 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(245,184,0,.08) 0%, transparent 70%);
+  top: -200px; right: -100px;
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(245,184,0,.05) 0%, transparent 70%);
+  bottom: -150px; left: -50px;
+  pointer-events: none;
+}
+
+.hero-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(245,184,0,.12);
+  border: 1px solid rgba(245,184,0,.25);
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.hero-badge::before { content: '●'; font-size: 7px; animation: blink 2s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+.hero h1 {
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1.15;
+  letter-spacing: -.5px;
+  margin-bottom: 16px;
+}
+
+.hero h1 em {
+  color: var(--gold);
+  font-style: normal;
+}
+
+.hero p {
+  font-size: 15px;
+  color: var(--gray);
+  line-height: 1.7;
+  max-width: 520px;
+  font-weight: 400;
+  margin-bottom: 40px;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.stat {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stat-ic {
+  width: 40px; height: 40px;
+  background: rgba(245,184,0,.12);
+  border: 1px solid rgba(245,184,0,.2);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+}
+
+.stat-info {}
+.stat-num { font-size: 18px; font-weight: 700; color: var(--gold); line-height: 1; }
+.stat-lbl { font-size: 11px; color: var(--gray); margin-top: 2px; font-weight: 400; }
+
+/* ── MAIN ── */
+.main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 48px 48px 100px;
+}
+
+/* ── TABS ── */
+.tabs {
+  display: flex;
+  gap: 4px;
+  background: var(--white);
+  border-radius: 12px;
+  padding: 5px;
+  box-shadow: var(--s1);
+  margin-bottom: 32px;
+  width: fit-content;
+}
+
+.tab {
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--navy3);
+  transition: all .18s;
+  border: none;
+  background: transparent;
+}
+
+.tab.active {
+  background: var(--navy);
+  color: var(--white);
+}
+
+.tab:not(.active):hover { background: var(--pale); color: var(--navy); }
+
+/* ── PANELS ── */
+.panel { display: none; }
+.panel.active { display: block; animation: fadeUp .3s ease; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+
+/* ── SEARCH CARD ── */
+.scard {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 28px 32px;
+  box-shadow: var(--s1);
+  margin-bottom: 28px;
+  transition: box-shadow .2s;
+}
+
+.scard:hover { box-shadow: var(--s2); }
+
+.scard-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--navy);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.scard-label::before {
+  content: '';
+  width: 3px; height: 14px;
+  background: var(--gold);
+  border-radius: 2px;
+}
+
+.irow {
+  display: flex;
+  border: 1px solid var(--gray2);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color .2s, box-shadow .2s;
+}
+
+.irow:focus-within {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(245,184,0,.1);
+}
+
+.inp {
+  flex: 1;
+  border: none;
+  padding: 14px 18px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  color: var(--navy3);
+  outline: none;
+  background: transparent;
+}
+
+.inp::placeholder { color: var(--gray); }
+.inp-mono { font-size: 13px; }
+
+.ibtn {
+  background: var(--gold);
+  color: var(--navy);
+  border: none;
+  padding: 14px 28px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .18s;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: var(--s-gold);
+}
+
+.ibtn:hover { background: var(--gold-h); }
+.ibtn:disabled { opacity: .4; cursor: not-allowed; }
+
+.ibtn2 {
+  background: var(--navy);
+  color: var(--white);
+  border: none;
+  padding: 14px 24px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .18s;
+  white-space: nowrap;
+}
+
+.ibtn2:hover { background: var(--navy2); }
+.ibtn2:disabled { opacity: .4; cursor: not-allowed; }
+
+.hint { font-size: 12px; color: var(--gray); margin-top: 10px; font-weight: 400; }
+
+/* ── GRID HEADER ── */
+.gh { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.gt { font-size: 12px; font-weight: 600; color: var(--navy); text-transform: uppercase; letter-spacing: 1px; }
+.gm { font-size: 12px; color: var(--gray); font-weight: 400; }
+
+/* ── VIDEO GRID ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+/* ── VIDEO CARD ── */
+.vc {
+  background: var(--white);
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all .22s;
+  box-shadow: var(--s1);
+  animation: fadeUp .4s ease both;
+}
+
+.vc:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--s3);
+}
+
+.tw { position: relative; aspect-ratio: 9/16; overflow: hidden; background: var(--pale); }
+.tw img { width: 100%; height: 100%; object-fit: cover; transition: transform .3s; }
+.vc:hover .tw img { transform: scale(1.05); }
+
+.vbadge {
+  position: absolute;
+  top: 8px; right: 8px;
+  background: rgba(11,17,49,.88);
+  backdrop-filter: blur(6px);
+  border-radius: 20px;
+  padding: 3px 9px;
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--gold);
+}
+
+.rbadge {
+  position: absolute;
+  top: 8px; left: 8px;
+  background: var(--gold);
+  color: var(--navy);
+  border-radius: 6px;
+  width: 24px; height: 24px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.toverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(11,17,49,.92) 0%, transparent 55%);
+  display: flex;
+  align-items: flex-end;
+  padding: 12px;
+  opacity: 0;
+  transition: opacity .2s;
+}
+
+.vc:hover .toverlay { opacity: 1; }
+
+.obtn {
+  background: var(--gold);
+  color: var(--navy);
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+}
+
+.vcb { padding: 12px 14px 14px; }
+.vt { font-size: 11px; font-weight: 500; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 4px; color: var(--navy3); }
+.vch { font-size: 10px; color: var(--gray); font-weight: 400; }
+
+/* ── SHEET LINK ── */
+.slink {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: var(--navy2);
+  text-decoration: none;
+  border: 1px solid var(--gray2);
+  border-radius: 8px;
+  padding: 7px 14px;
+  font-weight: 500;
+  transition: all .15s;
+}
+
+.slink:hover { color: var(--gold); border-color: var(--gold); }
+
+/* ── RESULT CARD ── */
+.rc {
+  background: var(--white);
+  border-radius: 16px;
+  box-shadow: var(--s1);
+  overflow: hidden;
+  margin-bottom: 20px;
+  animation: fadeUp .3s ease;
+}
+
+.rh { display: flex; gap: 16px; align-items: flex-start; padding: 20px 20px 0; }
+.rthumb { width: 64px; height: 64px; border-radius: 10px; object-fit: cover; flex-shrink: 0; background: var(--pale); }
+.ri { flex: 1; min-width: 0; }
+.rtitle { font-size: 15px; font-weight: 700; line-height: 1.3; margin-bottom: 5px; color: var(--navy); }
+.rmeta { font-size: 11px; color: var(--gray); display: flex; gap: 12px; flex-wrap: wrap; font-weight: 400; }
+.rmeta .v { color: var(--gold); font-weight: 600; }
+
+.lpill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(245,184,0,.1);
+  border: 1px solid rgba(245,184,0,.25);
+  border-radius: 20px;
+  padding: 3px 10px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--navy);
+  margin-top: 6px;
+}
+
+.rb2 { padding: 16px 20px 20px; }
+.tbox-label { font-size: 10px; font-weight: 600; color: var(--gray); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px; }
+.tbox { background: var(--pale); border: 1px solid var(--gray2); border-radius: 8px; padding: 14px 16px; font-size: 13px; line-height: 1.8; color: var(--navy3); max-height: 180px; overflow-y: auto; margin-bottom: 14px; white-space: pre-wrap; font-weight: 400; }
+.ar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+
+/* ── BUTTONS ── */
+.btn {
+  background: var(--gold);
+  color: var(--navy);
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .18s;
+  box-shadow: var(--s-gold);
+}
+
+.btn:hover { background: var(--gold-h); transform: translateY(-1px); }
+.btn:disabled { opacity: .35; cursor: not-allowed; transform: none; }
+
+.btn-sec {
+  background: transparent;
+  border: 2px solid var(--navy2);
+  color: var(--navy);
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .18s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.btn-sec:hover { background: var(--navy2); color: var(--white); }
+
+/* ── ANALYSIS ── */
+.aw {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 28px 32px;
+  box-shadow: var(--s1);
+  margin-bottom: 24px;
+  animation: fadeUp .35s ease;
+}
+
+.ahd { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
+.attl { font-size: 20px; font-weight: 800; color: var(--navy); margin-bottom: 3px; }
+.attl span { color: var(--gold); }
+.asub { font-size: 12px; color: var(--gray); font-weight: 400; font-style: italic; }
+.blocks { display: grid; gap: 12px; }
+
+.block {
+  background: var(--pale);
+  border: 1px solid var(--gray2);
+  border-radius: 12px;
+  padding: 16px 18px;
+  animation: fadeUp .3s ease both;
+  transition: box-shadow .2s;
+}
+
+.block:hover { box-shadow: var(--s1); }
+
+.bhd { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+
+.bic {
+  width: 32px; height: 32px;
+  background: var(--gold);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+.bttl { font-size: 11px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase; color: var(--navy); }
+.bbody { font-size: 13px; line-height: 1.8; color: var(--navy3); font-weight: 400; }
+.bbody strong { font-weight: 600; color: var(--navy); }
+
+/* ── DIVIDER ── */
+.divider { height: 1px; background: var(--gray2); margin: 24px 0; }
+
+/* ── HISTORY ── */
+.hlist { display: grid; gap: 10px; }
+
+.hc {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  box-shadow: var(--s1);
+  animation: fadeUp .3s ease both;
+  transition: box-shadow .2s;
+}
+
+.hc:hover { box-shadow: var(--s2); }
+.hth { width: 48px; height: 48px; border-radius: 8px; object-fit: cover; flex-shrink: 0; background: var(--pale); }
+.hinfo { flex: 1; min-width: 0; }
+.htitle { font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 3px; color: var(--navy); }
+.hmeta { font-size: 10px; color: var(--gray); display: flex; gap: 8px; flex-wrap: wrap; font-weight: 400; }
+.hmeta .v { color: var(--gold); font-weight: 600; }
+.hprev { font-size: 11px; color: var(--gray); margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* ── LOADING / ERROR ── */
+.loading { display: flex; align-items: center; gap: 12px; padding: 24px 4px; color: var(--gray); font-size: 13px; font-weight: 400; }
+.spin { width: 18px; height: 18px; border: 2px solid var(--gray2); border-top-color: var(--gold); border-radius: 50%; animation: spin .65s linear infinite; flex-shrink: 0; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.err { background: #FFF5F5; border: 1px solid #FFCDD2; border-radius: 8px; padding: 14px 16px; font-size: 12px; color: #C62828; line-height: 1.6; font-weight: 500; }
+
+.empty { text-align: center; padding: 56px 20px; color: var(--gray); font-size: 13px; line-height: 1.8; }
+.empty strong { display: block; font-size: 16px; color: var(--navy); margin-bottom: 8px; }
+
+/* ── SECTION TITLE ── */
+.sec-title { font-size: 18px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+.sec-sub { font-size: 13px; color: var(--gray); font-weight: 400; margin-bottom: 20px; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--navy);
+  padding: 40px 48px;
+  text-align: center;
+}
+
+.footer-logo { font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 6px; }
+.footer-logo span { color: var(--gold); }
+.footer-sub { font-size: 12px; color: var(--gray); font-weight: 400; }
+
+/* scrollbar */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--gray2); border-radius: 10px; }
+
+@media(max-width:900px){ .grid{grid-template-columns:repeat(3,1fr);} .main{padding:32px 24px 80px;} .hero{padding:48px 24px;} }
+@media(max-width:540px){ .grid{grid-template-columns:repeat(2,1fr);} .tabs{width:100%;} .tab{flex:1;text-align:center;padding:10px 12px;} }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <a class="logo" href="#">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#0B1131" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+          <polyline points="17 6 23 6 23 12"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        Intrade Academy
+        <span>Viral Script Analyzer</span>
+      </div>
+    </a>
+    <div class="header-badge">Herramienta interna</div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">Análisis de contenido viral</div>
+    <h1>Descifra el código<br/>de los videos <em>virales</em></h1>
+    <p>Busca los 10 Shorts con más vistas, extrae el guión automáticamente, traduce al español y guarda todo el registro en tu Google Sheet.</p>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-ic">🔍</div>
+        <div class="stat-info">
+          <div class="stat-num">Top 10</div>
+          <div class="stat-lbl">Videos más virales</div>
+        </div>
+      </div>
+      <div class="stat">
+        <div class="stat-ic">📝</div>
+        <div class="stat-info">
+          <div class="stat-num">Auto</div>
+          <div class="stat-lbl">Extracción de guión</div>
+        </div>
+      </div>
+      <div class="stat">
+        <div class="stat-ic">🌐</div>
+        <div class="stat-info">
+          <div class="stat-num">IA</div>
+          <div class="stat-lbl">Análisis profundo</div>
+        </div>
+      </div>
+      <div class="stat">
+        <div class="stat-ic">📊</div>
+        <div class="stat-info">
+          <div class="stat-num">Sheet</div>
+          <div class="stat-lbl">Registro automático</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('buscar')">🔍 Buscar Shorts</button>
+    <button class="tab" onclick="showTab('extraer')">📝 Extraer Guión</button>
+    <button class="tab" onclick="showTab('historial')">📊 Historial</button>
+  </div>
+
+  <!-- ══ BUSCAR ══ -->
+  <div class="panel active" id="tab-buscar">
+    <div class="scard">
+      <div class="scard-label">Palabra clave</div>
+      <div class="irow">
+        <input class="inp" id="kw" type="text" placeholder="Ej: motivación, crypto, pérdida de peso, ventas..."/>
+        <button class="ibtn" id="searchBtn" onclick="doSearch()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          Buscar Shorts
+        </button>
+      </div>
+      <p class="hint">Trae los 10 Shorts con más vistas y los guarda automáticamente en tu Google Sheet.</p>
+    </div>
+    <div id="gridSection"></div>
+  </div>
+
+  <!-- ══ EXTRAER ══ -->
+  <div class="panel" id="tab-extraer">
+    <div class="scard">
+      <div class="scard-label">URL del video de YouTube</div>
+      <div class="irow">
+        <input class="inp inp-mono" id="urlInput" type="text" placeholder="https://youtube.com/shorts/... o https://youtu.be/..."/>
+        <button class="ibtn2" id="extractBtn" onclick="doExtract()">Extraer guión →</button>
+      </div>
+      <p class="hint">Extrae los subtítulos, traduce al español si hace falta y guarda todo en tu Sheet.</p>
+    </div>
+    <div id="extractResult"></div>
+    <div id="analysisResult"></div>
+  </div>
+
+  <!-- ══ HISTORIAL ══ -->
+  <div class="panel" id="tab-historial">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:14px;">
+      <div>
+        <div class="sec-title">Historial de Guiones</div>
+        <div class="sec-sub">Todos los guiones extraídos y guardados en tu Google Sheet</div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+        <button class="btn-sec" onclick="loadHistorial()">↻ Actualizar</button>
+        <a class="slink" href="https://docs.google.com/spreadsheets/d/1u24Jcs5mcccCxhAbtQ6BdYT_Tm9Kp-2kNJjom7pDzOk/edit" target="_blank">📊 Abrir Google Sheet</a>
+      </div>
+    </div>
+    <div id="historialSection"></div>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Intrade <span>Academy</span></div>
+  <div class="footer-sub">Viral Script Analyzer · Herramienta interna de análisis de contenido · © 2025</div>
+</footer>
+
+<script>
+const BACKEND = 'https://script.google.com/macros/s/AKfycbyWL4RtGgIHyLAG6MnVcUz-QiqhN7ApPzkfq8G0JALyRXYPxUDdLPf6B86jpDj-g1Ju5g/exec';
+
+// ── JSONP ─────────────────────────────────────────────────────────
+function gasCall(params) {
+  return new Promise((resolve, reject) => {
+    const cb = '_cb' + Date.now() + Math.random().toString(36).slice(2);
+    const t  = setTimeout(() => { cleanup(); reject(new Error('Timeout: el servidor tardó demasiado.')); }, 30000);
+    const s  = document.createElement('script');
+
+    window[cb] = (data) => { cleanup(); if(data.error) reject(new Error(data.error)); else resolve(data); };
+    s.onerror  = () => { cleanup(); reject(new Error('No se pudo conectar con el servidor.')); };
+    function cleanup() { clearTimeout(t); delete window[cb]; s.remove(); }
+
+    s.src = BACKEND + '?' + new URLSearchParams({...params, callback: cb}).toString();
+    document.head.appendChild(s);
+  });
+}
+
+// ── HELPERS ───────────────────────────────────────────────────────
+const $  = id => document.getElementById(id);
+function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function fmt(n) { n=parseInt(n)||0; if(n>=1e9)return(n/1e9).toFixed(1)+'B'; if(n>=1e6)return(n/1e6).toFixed(1)+'M'; if(n>=1e3)return Math.round(n/1e3)+'K'; return String(n); }
+function set(id,h) { $(id).innerHTML = h; }
+function spin(id,msg) { set(id,`<div class="loading"><div class="spin"></div>${esc(msg)}</div>`); }
+function errMsg(id,msg) { set(id,`<div class="err">❌ ${esc(msg)}</div>`); }
+
+// ── TABS ──────────────────────────────────────────────────────────
+function showTab(name) {
+  ['buscar','extraer','historial'].forEach((n,i) => {
+    document.querySelectorAll('.tab')[i].classList.toggle('active', n===name);
+    $('tab-'+n).classList.toggle('active', n===name);
+  });
+  if(name==='historial') loadHistorial();
+}
+
+// ── BUSCAR ────────────────────────────────────────────────────────
+async function doSearch() {
+  const kw = $('kw').value.trim();
+  if(!kw) return;
+  const btn = $('searchBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<div class="spin" style="border-color:rgba(11,17,49,.15);border-top-color:#0B1131;width:14px;height:14px;border-width:2px;"></div> Buscando...';
+  spin('gridSection', `Buscando los 10 Shorts más virales de "${kw}"...`);
+
+  try {
+    const data = await gasCall({action:'search', q:kw});
+    renderGrid(data.videos||[], kw);
+  } catch(e) {
+    errMsg('gridSection', e.message);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg> Buscar Shorts';
+  }
+}
+
+function renderGrid(videos, kw) {
+  if(!videos.length) { set('gridSection',`<div class="empty"><strong>Sin resultados</strong>No se encontraron Shorts para "${esc(kw)}".</div>`); return; }
+
+  let h = `
+    <div class="gh">
+      <span class="gt">Top 10 · ${esc(kw)}</span>
+      <span class="gm">${videos.length} videos · guardados en Sheet ✓</span>
+    </div>
+    <div class="grid">`;
+
+  videos.forEach((v,i) => {
+    h += `
+      <div class="vc" style="animation-delay:${i*.06}s" onclick="goExtract(${JSON.stringify(v.url)})">
+        <div class="tw">
+          <img src="${esc(v.thumb)}" loading="lazy" onerror="this.style.display='none'"/>
+          <div class="rbadge">${i+1}</div>
+          ${v.views ? `<div class="vbadge">👁 ${fmt(v.views)}</div>` : ''}
+          <div class="toverlay"><button class="obtn">Extraer guión →</button></div>
+        </div>
+        <div class="vcb">
+          <div class="vt">${esc(v.title)}</div>
+          <div class="vch">${esc(v.channel)}</div>
+        </div>
+      </div>`;
+  });
+
+  h += `</div>
+    <div style="display:flex;justify-content:flex-end;margin-top:8px;">
+      <a class="slink" href="https://docs.google.com/spreadsheets/d/1u24Jcs5mcccCxhAbtQ6BdYT_Tm9Kp-2kNJjom7pDzOk/edit" target="_blank">📊 Ver en Google Sheet →</a>
+    </div>`;
+
+  set('gridSection', h);
+}
+
+function goExtract(url) {
+  showTab('extraer');
+  $('urlInput').value = url;
+  doExtract();
+}
+
+// ── EXTRAER ───────────────────────────────────────────────────────
+async function doExtract() {
+  const url = $('urlInput').value.trim();
+  if(!url) { alert('Pega una URL de YouTube primero.'); return; }
+  const btn = $('extractBtn');
+  btn.disabled = true; btn.textContent = 'Extrayendo...';
+  set('extractResult',''); set('analysisResult','');
+  spin('extractResult','Extrayendo subtítulos de YouTube...');
+
+  try {
+    const d = await gasCall({action:'transcript', url});
+    if(d.transcript) {
+      renderTranscript(d);
+    } else {
+      set('extractResult', `
+        <div class="err" style="margin-bottom:14px;">⚠️ ${esc(d.message||'Sin subtítulos automáticos.')} Puedes pegar el guión manualmente:</div>
+        <div class="rc"><div class="rb2">
+          ${d.title ? `<div style="font-size:15px;font-weight:700;color:var(--navy);margin-bottom:12px;">${esc(d.title)}</div>` : ''}
+          <textarea id="ms" style="width:100%;min-height:120px;background:var(--pale);border:1px solid var(--gray2);border-radius:8px;padding:14px;font-family:'Poppins',sans-serif;font-size:13px;color:var(--navy3);outline:none;resize:vertical;line-height:1.65;" placeholder="Pega aquí el guión del video..."></textarea>
+          <div class="ar" style="margin-top:12px;">
+            <button class="btn" onclick="runAnalysis($('ms').value,'','${esc(d.title||'Video')}')">🔍 Analizar guión →</button>
+          </div>
+        </div></div>`);
+    }
+  } catch(e) {
+    errMsg('extractResult', e.message);
+  } finally {
+    btn.disabled = false; btn.textContent = 'Extraer guión →';
+  }
+}
+
+function renderTranscript(d) {
+  const needsTrans = d.language && d.language !== 'es';
+  set('extractResult', `
+    <div class="rc">
+      <div class="rh">
+        <img class="rthumb" src="${esc(d.thumb)}" onerror="this.style.display='none'"/>
+        <div class="ri">
+          <div class="rtitle">${esc(d.title)}</div>
+          <div class="rmeta">
+            <span>${esc(d.channel)}</span>
+            ${d.views ? `<span class="v">👁 ${fmt(d.views)} vistas</span>` : ''}
+            <a href="https://youtube.com/watch?v=${esc(d.videoId)}" target="_blank" style="color:var(--gray);text-decoration:none;font-weight:500;">▶ Ver video</a>
+          </div>
+          <div class="lpill">${needsTrans ? '🌐 Idioma: '+esc(d.language)+' · se traduce al analizar' : '✓ Español detectado'}</div>
+        </div>
+      </div>
+      <div class="rb2">
+        <div class="tbox-label">Guión extraído · guardado en Sheet ✓</div>
+        <div class="tbox">${esc(d.transcript)}</div>
+        <div class="ar">
+          <button class="btn" id="analyzeBtn" onclick="runAnalysis(${JSON.stringify(d.transcript)},${JSON.stringify(d.language)},${JSON.stringify(d.title)})">
+            🔍 Analizar con IA →
+          </button>
+          <a class="slink" href="https://docs.google.com/spreadsheets/d/1u24Jcs5mcccCxhAbtQ6BdYT_Tm9Kp-2kNJjom7pDzOk/edit" target="_blank">📊 Ver en Sheet</a>
+        </div>
+      </div>
+    </div>`);
+}
+
+// ── ANÁLISIS ──────────────────────────────────────────────────────
+const BDEFS = [
+  {e:'🎣', l:'HOOK · Primeros 3 segundos'},
+  {e:'🏗️', l:'ESTRUCTURA DEL GUIÓN'},
+  {e:'💡', l:'TÉCNICAS DE PERSUASIÓN'},
+  {e:'😮', l:'EMOCIONES ACTIVADAS'},
+  {e:'📢', l:'LLAMADA A LA ACCIÓN'},
+  {e:'🔁', l:'FÓRMULA REPLICABLE'},
+  {e:'⚡', l:'VEREDICTO FINAL'},
+];
+
+async function runAnalysis(transcript, lang, title) {
+  if(!transcript||!transcript.trim()) { alert('El guión está vacío.'); return; }
+  const btn = $('analyzeBtn');
+  if(btn) { btn.disabled=true; btn.textContent='Analizando...'; }
+  spin('analysisResult','La IA está analizando el guión en profundidad...');
+  $('analysisResult').scrollIntoView({behavior:'smooth', block:'start'});
+
+  const langNote = (lang && lang!=='es')
+    ? `El guión está en idioma "${lang}". Tradúcelo completamente al español antes de analizar.`
+    : 'El guión está en español.';
+
+  try {
+    const r = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-5',
+        max_tokens: 4000,
+        system: `Eres un experto en marketing viral, copywriting y psicología del consumidor. Trabajas para Intrade Academy, una academia premium de trading e inversión. Analizas guiones de videos cortos virales con profundidad quirúrgica para que el equipo de contenido de Intrade Academy pueda replicar las fórmulas ganadoras. ${langNote} Responde SIEMPRE en español.`,
+        messages: [{role:'user', content:
+`Analiza este guión de video viral titulado "${title}":
+"""
+${transcript}
+"""
+
+Escribe el análisis en EXACTAMENTE 7 bloques separados por ===FIN===
+
+BLOQUE 1 — HOOK
+Técnica exacta del hook (curiosidad, shock, promesa, pregunta, desafío, identificación). Por qué funciona psicológicamente. Cita el hook exacto. Puntuación: X/10.
+===FIN===
+BLOQUE 2 — ESTRUCTURA
+Fórmula narrativa (PAS, AIDA, historia, tutorial, listicle). Cómo está organizado. Ritmo y momentos clave de retención.
+===FIN===
+BLOQUE 3 — TÉCNICAS DE PERSUASIÓN
+3 a 5 técnicas concretas y cómo impacta cada una. Prueba social, autoridad, escasez, urgencia, reciprocidad.
+===FIN===
+BLOQUE 4 — EMOCIONES ACTIVADAS
+Emociones exactas que dispara. Conexión con dolor, deseo o miedo del espectador. El insight psicológico que explota.
+===FIN===
+BLOQUE 5 — LLAMADA A LA ACCIÓN
+Cómo cierra el video. Qué acción pide o implica. Por qué el espectador siente que debe tomarla.
+===FIN===
+BLOQUE 6 — FÓRMULA REPLICABLE PARA INTRADE ACADEMY
+Plantilla adaptada para contenido de trading/inversión: "[Elemento A] → [Elemento B] → [CTA]". Ejemplo concreto aplicado a un tema de Intrade Academy (trading, cripto, inversión, negocios). Guión de muestra de 3-4 líneas listo para grabar.
+===FIN===
+BLOQUE 7 — VEREDICTO FINAL
+Por qué este video funciona (2 párrafos). Puntuación viral: X/10. Top 3 elementos irresistibles que Intrade Academy puede replicar.`
+        }]
+      })
+    });
+
+    const d = await r.json();
+    if(d.error) throw new Error(d.error.message);
+    const raw = (d.content||[]).map(b=>b.text||'').join('');
+    if(!raw) throw new Error('Respuesta vacía.');
+
+    const parts = raw.split('===FIN===').map(s=>s.trim()).filter(Boolean);
+
+    let h = `
+      <div class="aw">
+        <div class="ahd">
+          <div>
+            <div class="attl">Análisis <span>Completo</span></div>
+            <div class="asub">${esc(title)}</div>
+          </div>
+          <button class="btn-sec" onclick="set('analysisResult','')">✕ Cerrar</button>
+        </div>
+        <div class="blocks">`;
+
+    parts.forEach((part,i) => {
+      const def = BDEFS[i]||{e:'📋',l:`BLOQUE ${i+1}`};
+      const body = part
+        .replace(/^BLOQUE\s*\d+\s*[—–-]\s*[^\n]+\n?/i,'').trim()
+        .replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')
+        .replace(/\n/g,'<br/>');
+      h += `
+        <div class="block" style="animation-delay:${i*.07}s">
+          <div class="bhd">
+            <div class="bic">${def.e}</div>
+            <div class="bttl">${def.l}</div>
+          </div>
+          <div class="bbody">${body}</div>
+        </div>`;
+    });
+
+    h += `</div></div>`;
+    set('analysisResult', h);
+    $('analysisResult').scrollIntoView({behavior:'smooth', block:'start'});
+
+  } catch(e) {
+    errMsg('analysisResult', e.message);
+  }
+}
+
+// ── HISTORIAL ─────────────────────────────────────────────────────
+async function loadHistorial() {
+  spin('historialSection','Cargando historial desde Google Sheet...');
+  try {
+    const data = await gasCall({action:'getGuiones'});
+    const gs = data.guiones||[];
+
+    if(!gs.length) {
+      set('historialSection',`<div class="empty"><strong>Sin registros aún</strong>Ve a "Extraer Guión" para comenzar a guardar guiones.</div>`);
+      return;
+    }
+
+    let h = `<div class="hlist">`;
+    gs.forEach((g,i) => {
+      h += `
+        <div class="hc" style="animation-delay:${i*.04}s">
+          <img class="hth" src="${esc(g.thumb)}" onerror="this.style.display='none'"/>
+          <div class="hinfo">
+            <div class="htitle">${esc(g.title)}</div>
+            <div class="hmeta">
+              <span>${esc(g.channel)}</span>
+              ${g.views ? `<span class="v">👁 ${fmt(g.views)}</span>` : ''}
+              <span>🌐 ${esc(g.language||'?')}</span>
+              <span>${esc(String(g.fecha).slice(0,16))}</span>
+            </div>
+            <div class="hprev">${esc(String(g.transcript||'').slice(0,100))}...</div>
+          </div>
+          <button class="btn" style="font-size:11px;padding:9px 14px;flex-shrink:0;"
+            onclick="reuseGuion(${JSON.stringify(JSON.stringify(g))})">
+            🔍 Analizar
+          </button>
+        </div>`;
+    });
+    h += `</div>`;
+    set('historialSection', h);
+  } catch(e) {
+    errMsg('historialSection', e.message);
+  }
+}
+
+function reuseGuion(jsonStr) {
+  const g = JSON.parse(jsonStr);
+  showTab('extraer');
+  $('urlInput').value = g.url||'';
+  renderTranscript({
+    transcript: g.transcript, title: g.title, channel: g.channel,
+    views: g.views, thumb: g.thumb, videoId: g.videoId||'', language: g.language
+  });
+}
+
+$('kw').addEventListener('keydown', e => { if(e.key==='Enter') doSearch(); });
+$('urlInput').addEventListener('keydown', e => { if(e.key==='Enter') doExtract(); });
+</script>
+</body>
+</html>
